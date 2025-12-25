@@ -529,32 +529,268 @@ const COURSE_HANDOUT_DATA = {
   }
 };
 
-// 7. 新增：進階芳療 (NAHA) 資料 - 從 CSV 提取整理
+// 7. 更新：進階芳療 (NAHA) 資料
 const ADVANCED_AROMA_DATA = {
-  // 1. 精油單方詳細資料
+  // 1. 精油資料庫 (已更新為 30 支詳解版)
   oils: [
-    { name: "真正薰衣草", en: "True Lavender", latin: "Lavandula angustifolia", family: "唇形科", part: "花朵", method: "蒸餾", note: "中", effect: "安撫、鎮定、助眠、止痛", caution: "低血壓需注意" },
-    { name: "茶樹", en: "Tea Tree", latin: "Melaleuca alternifolia", family: "桃金孃科", part: "葉片", method: "蒸餾", note: "前", effect: "強力殺菌、抗病毒、免疫調節", caution: "皮膚敏感者需稀釋" },
-    { name: "尤加利", en: "Eucalyptus", latin: "Eucalyptus globulus", family: "桃金孃科", part: "葉片", method: "蒸餾", note: "前", effect: "呼吸道通暢、去痰、專注", caution: "高血壓、癲癇患者慎用" },
-    { name: "歐薄荷", en: "Peppermint", latin: "Mentha piperita", family: "唇形科", part: "全株", method: "蒸餾", note: "前", effect: "提神、止吐、退燒、止痛", caution: "孕婦、嬰幼兒禁用" },
-    { name: "迷迭香", en: "Rosemary", latin: "Rosmarinus officinalis", family: "唇形科", part: "花葉", method: "蒸餾", note: "中", effect: "記憶力、生髮、肌肉痠痛", caution: "高血壓、癲癇、孕婦慎用" },
-    { name: "天竺葵", en: "Geranium", latin: "Pelargonium graveolens", family: "牻牛兒科", part: "花葉", method: "蒸餾", note: "中", effect: "平衡荷爾蒙、利尿、護膚", caution: "調節荷爾蒙功能強，孕婦慎用" },
-    { name: "快樂鼠尾草", en: "Clary Sage", latin: "Salvia sclarea", family: "唇形科", part: "花葉", method: "蒸餾", note: "中", effect: "放鬆、幸福感、經前症候群", caution: "飲酒前後、開車時避免使用" },
-    { name: "羅馬洋甘菊", en: "Roman Chamomile", latin: "Anthemis nobilis", family: "菊科", part: "花朵", method: "蒸餾", note: "中", effect: "安撫情緒、過敏、兒童適用", caution: "懷孕初期避用" },
-    { name: "絲柏", en: "Cypress", latin: "Cupressus sempervirens", family: "柏科", part: "球果/枝葉", method: "蒸餾", note: "中", effect: "收斂、消水腫、靜脈曲張", caution: "懷孕初期避用" },
-    { name: "杜松漿果", en: "Juniper Berry", latin: "Juniperus communis", family: "柏科", part: "漿果", method: "蒸餾", note: "中", effect: "排毒、利尿、風濕痛", caution: "腎臟病患者慎用" },
-    { name: "檸檬", en: "Lemon", latin: "Citrus limon", family: "芸香科", part: "果皮", method: "冷壓", note: "前", effect: "提振精神、淨化空氣、美白", caution: "具光敏性，使用後避曬" },
-    { name: "甜橙", en: "Sweet Orange", latin: "Citrus sinensis", family: "芸香科", part: "果皮", method: "冷壓", note: "前", effect: "快樂、助眠、消化不良", caution: "輕微光敏性" },
-    { name: "葡萄柚", en: "Grapefruit", latin: "Citrus paradisi", family: "芸香科", part: "果皮", method: "冷壓", note: "前", effect: "提振、淋巴循環、燃脂", caution: "具光敏性" },
-    { name: "佛手柑", en: "Bergamot", latin: "Citrus bergamia", family: "芸香科", part: "果皮", method: "冷壓", note: "前", effect: "抗憂鬱、泌尿道感染", caution: "具強烈光敏性" },
-    { name: "依蘭", en: "Ylang Ylang", latin: "Cananga odorata", family: "番荔枝科", part: "花朵", method: "蒸餾", note: "中後", effect: "催情、降血壓、護髮", caution: "過量可能導致頭痛" },
-    { name: "乳香", en: "Frankincense", latin: "Boswellia carterii", family: "橄欖科", part: "樹脂", method: "蒸餾", note: "後", effect: "深層呼吸、冥想、抗老", caution: "無特別禁忌" },
-    { name: "沒藥", en: "Myrrh", latin: "Commiphora myrrha", family: "橄欖科", part: "樹脂", method: "蒸餾", note: "後", effect: "殺菌、傷口癒合、婦科問題", caution: "孕婦禁用" },
-    { name: "檀香", en: "Sandalwood", latin: "Santalum album", family: "檀香科", part: "木心", method: "蒸餾", note: "後", effect: "定香、泌尿道殺菌、靜心", caution: "避免使用瀕危物種來源" },
-    { name: "黑胡椒", en: "Black Pepper", latin: "Piper nigrum", family: "胡椒科", part: "果實", method: "蒸餾", note: "中", effect: "暖身、肌肉痠痛、促進循環", caution: "皮膚敏感者需低劑量" },
-    { name: "薑", en: "Ginger", latin: "Zingiber officinale", family: "薑科", part: "根莖", method: "蒸餾", note: "中後", effect: "暖胃、止吐、驅寒", caution: "皮膚敏感者需低劑量" }
+    {
+      id: 1, name: "甜橙", en: "Orange", latin: "Citrus sinensis", family: "芸香科",
+      part: "果皮", method: "低溫壓榨 (略具光敏性)",
+      properties: "辛、苦、溫", meridian: "脾、肺", suitable: "痰濕",
+      effect: "嬰幼兒脹氣、消化不良、食慾不振、幫助腸胃蠕動、治便祕",
+      chemical: "單萜烯、類可松體",
+      physio: "分子最小，輕盈易揮發(前調)、促循環、行氣效果好、代謝快、安全性高、抗菌(淨化空氣)、抗病毒、抗發炎、消炎、助消化、祛痰、止咳、提升免疫、類可體松(局部止痛)、激勵",
+      psycho: "提高專注力、緩解緊張情緒、心靈溫款、支持與陪伴"
+    },
+    {
+      id: 2, name: "薄荷", en: "Peppermint", latin: "Mentha piperita", family: "唇形科",
+      part: "葉", method: "蒸餾",
+      properties: "辛、涼", meridian: "肺、肝", suitable: "外感風熱、肝鬱氣滯",
+      effect: "緩解頭痛、偏頭痛、暈車暈船、噁心想吐、脹氣、消化不良、鼻塞、呼吸不順",
+      chemical: "醇類、酮類",
+      physio: "鎮痛、退燒、抗發炎、抗菌、抗病毒、緩解痙攣(腸胃)、祛痰、通鼻、提神、清醒",
+      psycho: "提振精神、提升專注、清理腦霧"
+    },
+    {
+      id: 3, name: "迷迭香", en: "Rosemary", latin: "Rosmarinus officinalis", family: "唇形科",
+      part: "葉、花", method: "蒸餾",
+      properties: "辛、溫", meridian: "肝、脾", suitable: "氣滯血瘀",
+      effect: "促進循環、改善手腳冰冷、提升記憶、專注、落髮、頭皮護理",
+      chemical: "氧化物、酮類",
+      physio: "促循環、行氣活血、提神醒腦、增強記憶、祛痰、抗菌、頭皮護理、強健髮根",
+      psycho: "清晰思緒、提升行動力、穩定心志"
+    },
+    {
+      id: 4, name: "尤加利", en: "Eucalyptus", latin: "Eucalyptus globulus", family: "桃金孃科",
+      part: "葉", method: "蒸餾",
+      properties: "辛、涼", meridian: "肺", suitable: "風寒、風熱皆可",
+      effect: "鼻塞、咳嗽、化痰、空氣淨化、抗菌",
+      chemical: "氧化物",
+      physio: "祛痰、止咳、通鼻、抗菌、抗病毒、提升免疫、抗發炎",
+      psycho: "清新、提振、減少疲憊感"
+    },
+    {
+      id: 5, name: "茶樹", en: "Tea Tree", latin: "Melaleuca alternifolia", family: "桃金孃科",
+      part: "葉", method: "蒸餾",
+      properties: "辛、苦、涼", meridian: "肺", suitable: "濕熱",
+      effect: "抗菌抗病毒、痘痘、皮膚感染、香港腳、黴菌",
+      chemical: "醇類",
+      physio: "廣效抗菌、抗病毒、抗黴菌、抗發炎、促進修復、免疫支持",
+      psycho: "清理、淨化感、提升防護與界線感"
+    },
+    {
+      id: 6, name: "薰衣草", en: "Lavender", latin: "Lavandula angustifolia", family: "唇形科",
+      part: "花", method: "蒸餾",
+      properties: "甘、涼", meridian: "心、肝", suitable: "肝鬱",
+      effect: "放鬆助眠、舒緩焦慮、晒傷、燙傷、蚊蟲叮咬",
+      chemical: "酯類",
+      physio: "鎮靜、助眠、抗發炎、止痛、促進皮膚修復",
+      psycho: "安撫情緒、減少緊繃與恐慌"
+    },
+    {
+      id: 7, name: "羅馬洋甘菊", en: "Roman Chamomile", latin: "Chamaemelum nobile", family: "菊科",
+      part: "花", method: "蒸餾",
+      properties: "甘、涼", meridian: "肝、脾", suitable: "肝鬱脾虛",
+      effect: "舒緩腸胃痙攣、胃痛、嬰幼兒情緒安撫、睡眠",
+      chemical: "酯類",
+      physio: "抗發炎、抗痙攣、舒緩腸胃不適、鎮靜、助眠",
+      psycho: "安撫哭鬧、降低焦躁、緊張"
+    },
+    {
+      id: 8, name: "德國洋甘菊", en: "German Chamomile", latin: "Matricaria recutita", family: "菊科",
+      part: "花", method: "蒸餾",
+      properties: "苦、涼", meridian: "肝", suitable: "血熱、發炎體質",
+      effect: "濕疹、過敏、皮膚發炎、消炎、止癢",
+      chemical: "倍半萜烯、氧化物",
+      physio: "強抗發炎、抗過敏、皮膚修復、止癢、舒緩胃炎",
+      psycho: "安撫受傷的心、穩定情緒波動"
+    },
+    {
+      id: 9, name: "玫瑰", en: "Rose", latin: "Rosa damascena", family: "薔薇科",
+      part: "花", method: "蒸餾",
+      properties: "甘、溫", meridian: "心、肝", suitable: "氣血兩虛",
+      effect: "荷爾蒙平衡、經期不適、肌膚保養、修復",
+      chemical: "醇類",
+      physio: "調理內分泌、促進循環、滋養皮膚、鎮靜抗憂鬱",
+      psycho: "自我接納、提升愛與被愛感"
+    },
+    {
+      id: 10, name: "天竺葵", en: "Geranium", latin: "Pelargonium graveolens", family: "牻牛兒苗科",
+      part: "葉、花", method: "蒸餾",
+      properties: "甘、溫", meridian: "肝", suitable: "肝鬱、內分泌失調",
+      effect: "經前症候群、情緒起伏、平衡油脂、肌膚修復",
+      chemical: "醇類",
+      physio: "平衡內分泌、收斂、修復、抗菌、促循環、利尿",
+      psycho: "穩定情緒、安撫焦慮、煩躁"
+    },
+    {
+      id: 11, name: "依蘭依蘭", en: "Ylang Ylang", latin: "Cananga odorata", family: "番荔枝科",
+      part: "花", method: "蒸餾",
+      properties: "甘、溫", meridian: "心", suitable: "心火旺、壓力大",
+      effect: "放鬆、降低血壓、改善失眠",
+      chemical: "酯類",
+      physio: "鎮靜、降壓、舒緩心悸、緊張、皮脂平衡",
+      psycho: "釋放壓力、找回愉悅與柔軟"
+    },
+    {
+      id: 12, name: "檸檬", en: "Lemon", latin: "Citrus limon", family: "芸香科",
+      part: "果皮", method: "低溫壓榨 (光敏性)",
+      properties: "酸、涼", meridian: "肝、胃", suitable: "濕熱",
+      effect: "淨化、抗菌、提神、清新",
+      chemical: "單萜烯",
+      physio: "抗菌、淨化空氣、促循環、助消化、提神",
+      psycho: "清爽、明亮感、提升專注"
+    },
+    {
+      id: 13, name: "佛手柑", en: "Bergamot", latin: "Citrus bergamia", family: "芸香科",
+      part: "果皮", method: "低溫壓榨 (光敏性)",
+      properties: "辛、苦、溫", meridian: "肝、脾", suitable: "肝鬱氣滯",
+      effect: "舒緩焦慮、憂鬱、消化不良、脹氣",
+      chemical: "酯類、單萜烯",
+      physio: "安撫神經、助眠、助消化、行氣、抗菌",
+      psycho: "提振又放鬆、減少憂鬱感"
+    },
+    {
+      id: 14, name: "葡萄柚", en: "Grapefruit", latin: "Citrus paradisi", family: "芸香科",
+      part: "果皮", method: "低溫壓榨 (略具光敏性)",
+      properties: "苦、涼", meridian: "脾、胃", suitable: "痰濕",
+      effect: "促進代謝、循環、水腫、橘皮組織",
+      chemical: "單萜烯",
+      physio: "促循環、利尿、代謝支持、淨化",
+      psycho: "輕盈、提振、減少拖延"
+    },
+    {
+      id: 15, name: "檀香", en: "Sandalwood", latin: "Santalum album", family: "檀香科",
+      part: "木心", method: "蒸餾",
+      properties: "甘、溫", meridian: "心、肺", suitable: "陰虛、煩躁",
+      effect: "乾燥肌、修復、冥想、安定",
+      chemical: "醇類",
+      physio: "保濕、修復皮膚、抗發炎、舒緩呼吸道",
+      psycho: "安定、沉靜、提升內在力量"
+    },
+    {
+      id: 16, name: "乳香", en: "Frankincense", latin: "Boswellia carterii", family: "橄欖科",
+      part: "樹脂", method: "蒸餾",
+      properties: "辛、溫", meridian: "心、肝", suitable: "氣滯血瘀",
+      effect: "促進傷口癒合、修復、抗皺、緊緻、冥想、呼吸支持",
+      chemical: "單萜烯",
+      physio: "抗發炎、促修復、免疫支持、促循環",
+      psycho: "安定、連結呼吸、支持內在信念"
+    },
+    {
+      id: 17, name: "沒藥", en: "Myrrh", latin: "Commiphora myrrha", family: "橄欖科",
+      part: "樹脂", method: "蒸餾",
+      properties: "苦、溫", meridian: "肝", suitable: "血瘀、寒凝",
+      effect: "口腔、牙齦保養、皮膚修復、龜裂",
+      chemical: "倍半萜烯",
+      physio: "抗菌、抗發炎、促進修復、收斂、口腔護理",
+      psycho: "沉著、穩定、支持面對創傷"
+    },
+    {
+      id: 18, name: "薑", en: "Ginger", latin: "Zingiber officinale", family: "薑科",
+      part: "根莖", method: "蒸餾",
+      properties: "辛、熱", meridian: "脾、胃", suitable: "寒濕",
+      effect: "暖身、促循環、消化不良、噁心",
+      chemical: "倍半萜烯",
+      physio: "促循環、暖身、助消化、止吐、止痛",
+      psycho: "提升勇氣、帶來動能"
+    },
+    {
+      id: 19, name: "黑胡椒", en: "Black Pepper", latin: "Piper nigrum", family: "胡椒科",
+      part: "果實", method: "蒸餾",
+      properties: "辛、溫", meridian: "脾、胃", suitable: "寒濕、氣滯",
+      effect: "促循環、肌肉酸痛、消化支持",
+      chemical: "單萜烯",
+      physio: "促循環、溫熱、緩解肌肉痠痛、助消化",
+      psycho: "增加行動力、打破停滯感"
+    },
+    {
+      id: 20, name: "丁香", en: "Clove", latin: "Syzygium aromaticum", family: "桃金孃科",
+      part: "花苞", method: "蒸餾",
+      properties: "辛、熱", meridian: "脾、腎", suitable: "寒邪",
+      effect: "牙痛、口腔抗菌、保暖、抗感染",
+      chemical: "酚類",
+      physio: "強抗菌、抗病毒、止痛（牙痛）、溫熱",
+      psycho: "強化防護感、提升決心"
+    },
+    {
+      id: 21, name: "肉桂", en: "Cinnamon", latin: "Cinnamomum verum", family: "樟科",
+      part: "樹皮", method: "蒸餾",
+      properties: "辛、熱", meridian: "脾、腎", suitable: "寒濕",
+      effect: "促循環、保暖、免疫支持",
+      chemical: "醛類",
+      physio: "抗菌、提升免疫、促循環、溫熱",
+      psycho: "帶來安全與力量感"
+    },
+    {
+      id: 22, name: "岩蘭草", en: "Vetiver", latin: "Vetiveria zizanioides", family: "禾本科",
+      part: "根", method: "蒸餾",
+      properties: "甘、溫", meridian: "肝、腎", suitable: "焦慮、失眠",
+      effect: "安定、助眠、皮膚修復",
+      chemical: "倍半萜烯",
+      physio: "鎮靜、助眠、抗發炎、修復",
+      psycho: "接地、穩定、降低焦慮"
+    },
+    {
+      id: 23, name: "廣藿香", en: "Patchouli", latin: "Pogostemon cablin", family: "唇形科",
+      part: "葉", method: "蒸餾",
+      properties: "辛、溫", meridian: "脾", suitable: "濕邪、黴菌",
+      effect: "香港腳、黴菌、皮膚修復、疤痕",
+      chemical: "倍半萜烯",
+      physio: "抗黴菌、抗菌、促修復、收斂",
+      psycho: "穩定、踏實、減少漂浮感"
+    },
+    {
+      id: 24, name: "雪松", en: "Cedarwood", latin: "Cedrus atlantica", family: "松科",
+      part: "針葉(枝幹)", method: "蒸餾",
+      properties: "辛、溫", meridian: "腎", suitable: "痰濕",
+      effect: "利尿、利水、泌尿系統發炎、緩解落髮、抗痙攣 (台灣→紅檜、扁柏)",
+      chemical: "", physio: "", psycho: ""
+    },
+    {
+      id: 25, name: "絲柏", en: "Cypress", latin: "Cupressus sempervirens", family: "柏科",
+      part: "葉、枝", method: "蒸餾",
+      properties: "苦、溫", meridian: "肺", suitable: "氣滯水腫",
+      effect: "水腫、循環、靜脈曲張、止汗",
+      chemical: "", physio: "", psycho: ""
+    },
+    {
+      id: 26, name: "杜松", en: "Juniper Berry", latin: "Juniperus communis", family: "柏科",
+      part: "果實", method: "蒸餾",
+      properties: "辛、溫", meridian: "腎", suitable: "濕邪、代謝差",
+      effect: "利尿、排水、泌尿系統支持",
+      chemical: "", physio: "", psycho: ""
+    },
+    {
+      id: 27, name: "檸檬草", en: "Lemongrass", latin: "Cymbopogon citratus", family: "禾本科",
+      part: "葉", method: "蒸餾",
+      properties: "辛、溫", meridian: "肝", suitable: "濕熱",
+      effect: "抗菌、除臭、肌肉酸痛",
+      chemical: "", physio: "", psycho: ""
+    },
+    {
+      id: 28, name: "百里香", en: "Thyme", latin: "Thymus vulgaris", family: "唇形科",
+      part: "葉、花", method: "蒸餾",
+      properties: "辛、溫", meridian: "肺", suitable: "風寒",
+      effect: "抗菌、呼吸道支持",
+      chemical: "", physio: "", psycho: ""
+    },
+    {
+      id: 29, name: "鼠尾草", en: "Sage", latin: "Salvia officinalis", family: "唇形科",
+      part: "葉", method: "蒸餾",
+      properties: "辛、溫", meridian: "肝", suitable: "寒濕",
+      effect: "抗菌、調理循環",
+      chemical: "", physio: "", psycho: ""
+    },
+    {
+      id: 30, name: "松", en: "Pine", latin: "Pinus sylvestris", family: "松科",
+      part: "針葉", method: "蒸餾",
+      properties: "辛、溫", meridian: "肺", suitable: "風寒",
+      effect: "呼吸道支持、祛痰、抗菌淨化",
+      chemical: "", physio: "", psycho: ""
+    }
   ],
-  // 2. 植物油 (基底油) 資料
+  // 2. 植物油 (基底油) 資料 (維持原樣)
   carriers: [
     { name: "甜杏仁油", en: "Sweet Almond Oil", feature: "溫和、延展性好", skin: "各膚質、嬰兒", nutrient: "維生素A, B, E" },
     { name: "荷荷芭油", en: "Jojoba Oil", feature: "液態蠟、不易氧化、似皮脂", skin: "油性、混合性、發炎肌", nutrient: "礦物質、蛋白質" },
@@ -562,7 +798,7 @@ const ADVANCED_AROMA_DATA = {
     { name: "玫瑰果油", en: "Rosehip Oil", feature: "修復力強、細胞再生", skin: "老化、疤痕、乾燥肌", nutrient: "維生素C、亞麻油酸" },
     { name: "聖約翰草油", en: "St. John's Wort Oil", feature: "浸泡油、紅色、止痛", skin: "創傷、肌肉痠痛", nutrient: "金絲桃素 (具光敏性)" }
   ],
-  // 3. 歷史發展 (Timeline)
+  // 3. 歷史發展 (維持原樣)
   history: [
     { era: "古埃及 (西元前3000)", event: "木乃伊製作", content: "使用雪松、沒藥等防腐，亦用於薰香祭祀 (Kyphi)。" },
     { era: "古中國 (西元前2700)", event: "神農本草經", content: "記載300多種藥草，奠定草藥學基礎。" },
@@ -573,7 +809,7 @@ const ADVANCED_AROMA_DATA = {
     { era: "1950年代", event: "瑪格麗特·摩利", content: "將精油結合按摩療法，推廣至美容領域，提出「個別處方」概念。" },
     { era: "1977年", event: "羅伯·滴沙蘭德", content: "撰寫《芳香療法的藝術》，強調精油使用的安全性。" }
   ],
-  // 4. 個案研究
+  // 4. 個案研究 (維持原樣)
   cases: {
     teacher: [
       { title: "失眠/焦慮", symptom: "入睡困難、多夢、情緒緊繃", recipe: "真正薰衣草 3d + 甜橙 2d + 苦橙葉 1d (擴香)", note: "睡前30分鐘擴香，可搭配呼吸法。" },
@@ -586,7 +822,7 @@ const ADVANCED_AROMA_DATA = {
       { title: "痘痘/粉刺", symptom: "油性肌膚、紅腫痘痘", recipe: "茶樹 1d + 薰衣草 1d (點塗)", note: "直接點在痘痘上(急救)，或稀釋於蘆薈膠中使用。" }
     ]
   },
-  // 5. 其他重點 (理論/安全)
+  // 5. 其他重點 (維持原樣)
   theory: [
     { title: "精油保存", content: "存放於深色玻璃瓶，置於陰涼處，避免陽光直射與高溫。柑橘類開封後半年至一年用完，其他約兩至三年。" },
     { title: "稀釋比例", content: "臉部用：0.5% - 1% (10ml基底油 + 1-2滴精油)\n身體用：3% - 5% (10ml基底油 + 6-10滴精油)\n局部急救：可達 10% 或極少數(如薰衣草、茶樹)可點塗。" },
@@ -1152,7 +1388,7 @@ const OilCourseHandout = () => {
   );
 };
 
-// 7. 新增：進階芳療 (NAHA) 講義模組
+// 7. 新增：進階芳療 (NAHA) 講義模組 (已更新 UI 以適應新資料)
 const AdvancedAromaHandout = () => {
   const [activeTab, setActiveTab] = useState('oils'); // oils, carriers, history, cases, theory
   const [searchTerm, setSearchTerm] = useState('');
@@ -1160,7 +1396,8 @@ const AdvancedAromaHandout = () => {
   const filteredOils = ADVANCED_AROMA_DATA.oils.filter(oil => 
     oil.name.includes(searchTerm) || 
     oil.en.toLowerCase().includes(searchTerm.toLowerCase()) ||
-    oil.effect.includes(searchTerm)
+    (oil.effect && oil.effect.includes(searchTerm)) ||
+    (oil.suitable && oil.suitable.includes(searchTerm))
   );
 
   return (
@@ -1188,42 +1425,66 @@ const AdvancedAromaHandout = () => {
 
       <div className="p-4 md:p-6 bg-gray-50 flex-1 overflow-y-auto">
         
-        {/* 1. 精油單方 Tab */}
+        {/* 1. 精油單方 Tab (更新版 UI) */}
         {activeTab === 'oils' && (
           <div className="space-y-4">
             <div className="relative">
               <Search className="absolute left-3 top-2.5 w-4 h-4 text-gray-400"/>
               <input 
                 type="text" 
-                placeholder="搜尋精油名稱、英文或療效..." 
+                placeholder="搜尋精油名稱、英文、療效或適應症..." 
                 className="w-full pl-9 pr-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-rose-300 text-sm"
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
               />
             </div>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-              {filteredOils.map((oil, idx) => (
-                <div key={idx} className="bg-white p-4 rounded-lg shadow-sm border hover:shadow-md transition border-l-4 border-l-rose-400">
-                  <div className="flex justify-between items-start mb-2">
+            <div className="grid grid-cols-1 gap-6">
+              {filteredOils.map((oil) => (
+                <div key={oil.id} className="bg-white p-5 rounded-xl shadow-sm border border-gray-200 hover:shadow-md transition">
+                  <div className="flex flex-col md:flex-row justify-between border-b pb-3 mb-3">
                     <div>
-                      <h3 className="font-bold text-gray-800 text-lg">{oil.name}</h3>
-                      <p className="text-xs text-gray-500 font-mono">{oil.en}</p>
+                      <h3 className="text-xl font-bold text-gray-800 flex items-center">
+                        <span className="bg-rose-100 text-rose-700 w-6 h-6 rounded-full flex items-center justify-center text-xs mr-2">{oil.id}</span>
+                        {oil.name} <span className="ml-2 text-sm text-gray-500 font-normal font-mono">{oil.en}</span>
+                      </h3>
+                      <p className="text-xs text-gray-400 mt-1 italic">{oil.latin}</p>
                     </div>
-                    <span className="text-xs bg-rose-100 text-rose-700 px-2 py-0.5 rounded-full font-bold">{oil.family}</span>
+                    <div className="mt-2 md:mt-0 flex gap-2 text-xs">
+                      <span className="px-2 py-1 bg-gray-100 rounded text-gray-600">科屬: {oil.family}</span>
+                      <span className="px-2 py-1 bg-gray-100 rounded text-gray-600">部位: {oil.part}</span>
+                      <span className="px-2 py-1 bg-gray-100 rounded text-gray-600">方式: {oil.method}</span>
+                    </div>
                   </div>
-                  <div className="text-xs space-y-1.5 text-gray-600 mt-3">
-                    <p><span className="font-bold text-gray-400">學名:</span> {oil.latin}</p>
-                    <p><span className="font-bold text-gray-400">部位/製法:</span> {oil.part} / {oil.method}</p>
-                    <p><span className="font-bold text-gray-400">調性:</span> {oil.note}</p>
-                    <div className="bg-rose-50 p-2 rounded mt-2">
-                      <p className="font-bold text-rose-800 mb-1">主要療效</p>
-                      <p>{oil.effect}</p>
+
+                  <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-sm">
+                    {/* 中醫屬性區 */}
+                    <div className="bg-amber-50 p-3 rounded-lg border border-amber-100">
+                      <h4 className="font-bold text-amber-800 mb-2 flex items-center border-b border-amber-200 pb-1">🌿 屬性與歸經</h4>
+                      <p className="mb-1"><span className="text-amber-700 font-medium">性味:</span> {oil.properties}</p>
+                      <p className="mb-1"><span className="text-amber-700 font-medium">歸經:</span> {oil.meridian}</p>
+                      <p><span className="text-amber-700 font-medium">適用:</span> {oil.suitable}</p>
                     </div>
-                    {oil.caution && (
-                      <p className="text-red-500 flex items-start mt-1">
-                        <span className="font-bold mr-1">⚠️</span> {oil.caution}
-                      </p>
-                    )}
+
+                    {/* 化學與療效區 */}
+                    <div className="md:col-span-2 space-y-3">
+                      {oil.chemical && (
+                        <div className="flex items-start">
+                          <span className="shrink-0 bg-blue-100 text-blue-700 text-xs px-2 py-0.5 rounded font-bold mr-2 mt-0.5">化學</span>
+                          <span className="text-gray-700">{oil.chemical}</span>
+                        </div>
+                      )}
+                      <div className="flex items-start">
+                        <span className="shrink-0 bg-rose-100 text-rose-700 text-xs px-2 py-0.5 rounded font-bold mr-2 mt-0.5">主效</span>
+                        <span className="text-gray-800 font-medium">{oil.effect}</span>
+                      </div>
+                      
+                      {oil.physio && (
+                        <div className="text-xs text-gray-600 border-t pt-2 mt-2">
+                          <p className="mb-1"><span className="font-bold text-gray-700">💪 生理:</span> {oil.physio}</p>
+                          <p><span className="font-bold text-gray-700">🧠 心理:</span> {oil.psycho}</p>
+                        </div>
+                      )}
+                    </div>
                   </div>
                 </div>
               ))}
