@@ -193,7 +193,7 @@ const transportData = {
   }
 };
 
-// 2. 話術資料
+// 2. QA資料
 const scripts = [
   {
     category: "飾品專區 QA (New!)",
@@ -1049,7 +1049,7 @@ const SOPViewer = () => {
   );
 };
 
-// 3. 話術庫元件
+// 3. QA庫元件
 const ScriptLibrary = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [copiedId, setCopiedId] = useState(null);
@@ -1064,7 +1064,7 @@ const ScriptLibrary = () => {
     <div className="bg-white p-6 rounded-lg shadow-md h-full">
        <div className="mb-6">
          <h2 className="text-xl font-bold text-gray-800 mb-4 flex items-center">
-            <MessageSquare className="w-6 h-6 mr-2 text-pink-600" /> 客服話術大補帖
+            <MessageSquare className="w-6 h-6 mr-2 text-pink-600" /> 客服QA大補帖
           </h2>
          <input type="text" placeholder="搜尋..." className="w-full p-2 border rounded shadow-sm outline-none" value={searchTerm} onChange={(e) => setSearchTerm(e.target.value)}/>
        </div>
@@ -1671,7 +1671,7 @@ const App = () => {
   const navItems = [
     { id: 'calculator', label: '企業報價計算', icon: <Calculator className="w-5 h-5"/> },
     { id: 'sop', label: '出課與運費SOP', icon: <FileText className="w-5 h-5"/> },
-    { id: 'scripts', label: '客服話術庫', icon: <MessageSquare className="w-5 h-5"/> },
+    { id: 'scripts', label: '客服回答庫', icon: <MessageSquare className="w-5 h-5"/> },
     { id: 'knowledge', label: '內部知識庫', icon: <BookOpen className="w-5 h-5"/> },
     { id: 'course_knowledge', label: '課程知識庫', icon: <GraduationCap className="w-5 h-5"/> },
   ];
