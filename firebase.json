@@ -1,5 +1,6 @@
 {
   "hosting": {
+    "target": "xiabenhowhelper",
     "public": "dist",
     "ignore": [
       "firebase.json",

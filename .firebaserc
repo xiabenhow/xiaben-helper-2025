@@ -1,5 +1,15 @@
 {
   "projects": {
     "default": "xiabenhowdata"
-  }
+  },
+  "targets": {
+    "xiabenhow-quote": {
+      "hosting": {
+        "xiabenhowhelper": [
+          "xiabenhowhelper"
+        ]
+      }
+    }
+  },
+  "etags": {}
 }

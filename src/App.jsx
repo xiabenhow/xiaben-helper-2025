@@ -19,7 +19,12 @@ import {
   Library,
   Palette,
   Flame,
-  Flower2
+  Flower2,
+  Droplet,
+  Scroll,
+  UserCheck,
+  FlaskConical,
+  Search
 } from 'lucide-react';
 
 // --- 資料庫區 (Data) ---
@@ -350,7 +355,7 @@ const clients = {
   "科技/其他": ["Meta", "IBM", "Google", "街口支付", "Line", "91App", "HP", "鴻海", "狄卡(Dcard)", "輝瑞", "雅虎", "3M", "海悅國際", "世界展望會", "盟立自動化", "德州儀器", "台灣電力公司", "嬌生", "龍騰文化", "南亞科技", "明緯", "智邦", "新蛋", "幫你優", "緯創", "宜鼎", "台灣諾華", "塞紐仕醫藥", "精英公共關係", "邁達特數位", "聯合利華", "亞馬遜", "忠泰建設", "台灣山洋", "ASML", "redbull", "vivotek", "汎球", "拜爾", "巨輪", "浩騰", "奇宏", "統一", "信義房屋"]
 };
 
-// 6. 新增：課程講義內容資料 (嚴格保留原文)
+// 6. 課程講義內容資料 (初階 - 嚴格保留原文)
 const COURSE_HANDOUT_DATA = {
   chapter1: {
     title: "第一章：基礎知識與保存",
@@ -522,6 +527,72 @@ const COURSE_HANDOUT_DATA = {
       { key: "製作基劑", source: "香水酒精...加二十左右到那個量杯裡面" }
     ]
   }
+};
+
+// 7. 新增：進階芳療 (NAHA) 資料 - 從 CSV 提取整理
+const ADVANCED_AROMA_DATA = {
+  // 1. 精油單方詳細資料
+  oils: [
+    { name: "真正薰衣草", en: "True Lavender", latin: "Lavandula angustifolia", family: "唇形科", part: "花朵", method: "蒸餾", note: "中", effect: "安撫、鎮定、助眠、止痛", caution: "低血壓需注意" },
+    { name: "茶樹", en: "Tea Tree", latin: "Melaleuca alternifolia", family: "桃金孃科", part: "葉片", method: "蒸餾", note: "前", effect: "強力殺菌、抗病毒、免疫調節", caution: "皮膚敏感者需稀釋" },
+    { name: "尤加利", en: "Eucalyptus", latin: "Eucalyptus globulus", family: "桃金孃科", part: "葉片", method: "蒸餾", note: "前", effect: "呼吸道通暢、去痰、專注", caution: "高血壓、癲癇患者慎用" },
+    { name: "歐薄荷", en: "Peppermint", latin: "Mentha piperita", family: "唇形科", part: "全株", method: "蒸餾", note: "前", effect: "提神、止吐、退燒、止痛", caution: "孕婦、嬰幼兒禁用" },
+    { name: "迷迭香", en: "Rosemary", latin: "Rosmarinus officinalis", family: "唇形科", part: "花葉", method: "蒸餾", note: "中", effect: "記憶力、生髮、肌肉痠痛", caution: "高血壓、癲癇、孕婦慎用" },
+    { name: "天竺葵", en: "Geranium", latin: "Pelargonium graveolens", family: "牻牛兒科", part: "花葉", method: "蒸餾", note: "中", effect: "平衡荷爾蒙、利尿、護膚", caution: "調節荷爾蒙功能強，孕婦慎用" },
+    { name: "快樂鼠尾草", en: "Clary Sage", latin: "Salvia sclarea", family: "唇形科", part: "花葉", method: "蒸餾", note: "中", effect: "放鬆、幸福感、經前症候群", caution: "飲酒前後、開車時避免使用" },
+    { name: "羅馬洋甘菊", en: "Roman Chamomile", latin: "Anthemis nobilis", family: "菊科", part: "花朵", method: "蒸餾", note: "中", effect: "安撫情緒、過敏、兒童適用", caution: "懷孕初期避用" },
+    { name: "絲柏", en: "Cypress", latin: "Cupressus sempervirens", family: "柏科", part: "球果/枝葉", method: "蒸餾", note: "中", effect: "收斂、消水腫、靜脈曲張", caution: "懷孕初期避用" },
+    { name: "杜松漿果", en: "Juniper Berry", latin: "Juniperus communis", family: "柏科", part: "漿果", method: "蒸餾", note: "中", effect: "排毒、利尿、風濕痛", caution: "腎臟病患者慎用" },
+    { name: "檸檬", en: "Lemon", latin: "Citrus limon", family: "芸香科", part: "果皮", method: "冷壓", note: "前", effect: "提振精神、淨化空氣、美白", caution: "具光敏性，使用後避曬" },
+    { name: "甜橙", en: "Sweet Orange", latin: "Citrus sinensis", family: "芸香科", part: "果皮", method: "冷壓", note: "前", effect: "快樂、助眠、消化不良", caution: "輕微光敏性" },
+    { name: "葡萄柚", en: "Grapefruit", latin: "Citrus paradisi", family: "芸香科", part: "果皮", method: "冷壓", note: "前", effect: "提振、淋巴循環、燃脂", caution: "具光敏性" },
+    { name: "佛手柑", en: "Bergamot", latin: "Citrus bergamia", family: "芸香科", part: "果皮", method: "冷壓", note: "前", effect: "抗憂鬱、泌尿道感染", caution: "具強烈光敏性" },
+    { name: "依蘭", en: "Ylang Ylang", latin: "Cananga odorata", family: "番荔枝科", part: "花朵", method: "蒸餾", note: "中後", effect: "催情、降血壓、護髮", caution: "過量可能導致頭痛" },
+    { name: "乳香", en: "Frankincense", latin: "Boswellia carterii", family: "橄欖科", part: "樹脂", method: "蒸餾", note: "後", effect: "深層呼吸、冥想、抗老", caution: "無特別禁忌" },
+    { name: "沒藥", en: "Myrrh", latin: "Commiphora myrrha", family: "橄欖科", part: "樹脂", method: "蒸餾", note: "後", effect: "殺菌、傷口癒合、婦科問題", caution: "孕婦禁用" },
+    { name: "檀香", en: "Sandalwood", latin: "Santalum album", family: "檀香科", part: "木心", method: "蒸餾", note: "後", effect: "定香、泌尿道殺菌、靜心", caution: "避免使用瀕危物種來源" },
+    { name: "黑胡椒", en: "Black Pepper", latin: "Piper nigrum", family: "胡椒科", part: "果實", method: "蒸餾", note: "中", effect: "暖身、肌肉痠痛、促進循環", caution: "皮膚敏感者需低劑量" },
+    { name: "薑", en: "Ginger", latin: "Zingiber officinale", family: "薑科", part: "根莖", method: "蒸餾", note: "中後", effect: "暖胃、止吐、驅寒", caution: "皮膚敏感者需低劑量" }
+  ],
+  // 2. 植物油 (基底油) 資料
+  carriers: [
+    { name: "甜杏仁油", en: "Sweet Almond Oil", feature: "溫和、延展性好", skin: "各膚質、嬰兒", nutrient: "維生素A, B, E" },
+    { name: "荷荷芭油", en: "Jojoba Oil", feature: "液態蠟、不易氧化、似皮脂", skin: "油性、混合性、發炎肌", nutrient: "礦物質、蛋白質" },
+    { name: "葡萄籽油", en: "Grapeseed Oil", feature: "清爽、好吸收", skin: "油性、痘痘肌", nutrient: "亞麻油酸、原花青素" },
+    { name: "玫瑰果油", en: "Rosehip Oil", feature: "修復力強、細胞再生", skin: "老化、疤痕、乾燥肌", nutrient: "維生素C、亞麻油酸" },
+    { name: "聖約翰草油", en: "St. John's Wort Oil", feature: "浸泡油、紅色、止痛", skin: "創傷、肌肉痠痛", nutrient: "金絲桃素 (具光敏性)" }
+  ],
+  // 3. 歷史發展 (Timeline)
+  history: [
+    { era: "古埃及 (西元前3000)", event: "木乃伊製作", content: "使用雪松、沒藥等防腐，亦用於薰香祭祀 (Kyphi)。" },
+    { era: "古中國 (西元前2700)", event: "神農本草經", content: "記載300多種藥草，奠定草藥學基礎。" },
+    { era: "古希臘 (西元前400)", event: "希波克拉底", content: "醫學之父，提倡芳香浴與按摩維持健康。" },
+    { era: "古羅馬 (西元200)", event: "蓋倫 (Galen)", content: "發明「冷霜」(Cold Cream)，結合油、水、蜂蠟。" },
+    { era: "中世紀 (西元1000)", event: "阿維森納 (Avicenna)", content: "發明蒸餾法，提煉出第一滴玫瑰精油。" },
+    { era: "1928年", event: "蓋特佛賽 (Gattefosse)", content: "法國化學家，實驗室燒傷發現薰衣草油療效，首創「Aromatherapy」一詞。" },
+    { era: "1950年代", event: "瑪格麗特·摩利", content: "將精油結合按摩療法，推廣至美容領域，提出「個別處方」概念。" },
+    { era: "1977年", event: "羅伯·滴沙蘭德", content: "撰寫《芳香療法的藝術》，強調精油使用的安全性。" }
+  ],
+  // 4. 個案研究
+  cases: {
+    teacher: [
+      { title: "失眠/焦慮", symptom: "入睡困難、多夢、情緒緊繃", recipe: "真正薰衣草 3d + 甜橙 2d + 苦橙葉 1d (擴香)", note: "睡前30分鐘擴香，可搭配呼吸法。" },
+      { title: "肌肉痠痛", symptom: "運動後乳酸堆積、肩頸僵硬", recipe: "迷迭香 2d + 黑胡椒 1d + 檸檬草 1d + 10ml 基底油 (按摩)", note: "局部按摩患處，促進循環。" },
+      { title: "感冒初期", symptom: "喉嚨癢、鼻塞", recipe: "茶樹 2d + 尤加利 2d + 檸檬 1d (蒸氣吸入)", note: "熱水中滴入精油，閉眼吸入蒸氣約5分鐘。" }
+    ],
+    student: [
+      { title: "經痛/經前症候群", symptom: "下腹悶痛、情緒暴躁", recipe: "快樂鼠尾草 2d + 天竺葵 2d + 薰衣草 2d + 10ml 基底油", note: "順時針按摩下腹部與後腰部。" },
+      { title: "注意力不集中", symptom: "午後昏沈、工作效率低", recipe: "檸檬 3d + 迷迭香 2d (擴香)", note: "清新的氣味有助於提神醒腦。" },
+      { title: "痘痘/粉刺", symptom: "油性肌膚、紅腫痘痘", recipe: "茶樹 1d + 薰衣草 1d (點塗)", note: "直接點在痘痘上(急救)，或稀釋於蘆薈膠中使用。" }
+    ]
+  },
+  // 5. 其他重點 (理論/安全)
+  theory: [
+    { title: "精油保存", content: "存放於深色玻璃瓶，置於陰涼處，避免陽光直射與高溫。柑橘類開封後半年至一年用完，其他約兩至三年。" },
+    { title: "稀釋比例", content: "臉部用：0.5% - 1% (10ml基底油 + 1-2滴精油)\n身體用：3% - 5% (10ml基底油 + 6-10滴精油)\n局部急救：可達 10% 或極少數(如薰衣草、茶樹)可點塗。" },
+    { title: "光敏性", content: "芸香科果皮類精油 (檸檬、佛手柑、葡萄柚等) 具光敏性，塗抹於皮膚後12小時內避免曝曬陽光，否則易產生色斑。" },
+    { title: "過敏測試", content: "初次使用新精油，建議稀釋後塗抹於手肘內側，靜待24小時觀察有無紅腫癢反應。" }
+  ]
 };
 
 // --- 元件區 ---
@@ -1081,9 +1152,197 @@ const OilCourseHandout = () => {
   );
 };
 
-// 6. 新增：課程知識庫總容器 (Course Knowledge Hub)
+// 7. 新增：進階芳療 (NAHA) 講義模組
+const AdvancedAromaHandout = () => {
+  const [activeTab, setActiveTab] = useState('oils'); // oils, carriers, history, cases, theory
+  const [searchTerm, setSearchTerm] = useState('');
+
+  const filteredOils = ADVANCED_AROMA_DATA.oils.filter(oil => 
+    oil.name.includes(searchTerm) || 
+    oil.en.toLowerCase().includes(searchTerm.toLowerCase()) ||
+    oil.effect.includes(searchTerm)
+  );
+
+  return (
+    <div className="bg-white min-h-[600px] rounded-b-lg rounded-tr-lg overflow-hidden flex flex-col border border-gray-200">
+      {/* Sub Navigation Tabs */}
+      <div className="bg-slate-50 border-b p-2 overflow-x-auto">
+        <div className="flex space-x-2 min-w-max">
+          <button onClick={() => setActiveTab('oils')} className={`flex items-center px-3 py-1.5 rounded-md text-xs font-bold transition ${activeTab === 'oils' ? 'bg-rose-600 text-white' : 'bg-white text-gray-600 border hover:bg-gray-100'}`}>
+            <Droplet className="w-3 h-3 mr-1"/> 精油單方
+          </button>
+          <button onClick={() => setActiveTab('carriers')} className={`flex items-center px-3 py-1.5 rounded-md text-xs font-bold transition ${activeTab === 'carriers' ? 'bg-amber-600 text-white' : 'bg-white text-gray-600 border hover:bg-gray-100'}`}>
+            <FlaskConical className="w-3 h-3 mr-1"/> 植物油
+          </button>
+          <button onClick={() => setActiveTab('history')} className={`flex items-center px-3 py-1.5 rounded-md text-xs font-bold transition ${activeTab === 'history' ? 'bg-sky-600 text-white' : 'bg-white text-gray-600 border hover:bg-gray-100'}`}>
+            <Scroll className="w-3 h-3 mr-1"/> 歷史發展
+          </button>
+          <button onClick={() => setActiveTab('cases')} className={`flex items-center px-3 py-1.5 rounded-md text-xs font-bold transition ${activeTab === 'cases' ? 'bg-emerald-600 text-white' : 'bg-white text-gray-600 border hover:bg-gray-100'}`}>
+            <UserCheck className="w-3 h-3 mr-1"/> 個案研究
+          </button>
+          <button onClick={() => setActiveTab('theory')} className={`flex items-center px-3 py-1.5 rounded-md text-xs font-bold transition ${activeTab === 'theory' ? 'bg-violet-600 text-white' : 'bg-white text-gray-600 border hover:bg-gray-100'}`}>
+            <BookOpen className="w-3 h-3 mr-1"/> 其他重點
+          </button>
+        </div>
+      </div>
+
+      <div className="p-4 md:p-6 bg-gray-50 flex-1 overflow-y-auto">
+        
+        {/* 1. 精油單方 Tab */}
+        {activeTab === 'oils' && (
+          <div className="space-y-4">
+            <div className="relative">
+              <Search className="absolute left-3 top-2.5 w-4 h-4 text-gray-400"/>
+              <input 
+                type="text" 
+                placeholder="搜尋精油名稱、英文或療效..." 
+                className="w-full pl-9 pr-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-rose-300 text-sm"
+                value={searchTerm}
+                onChange={(e) => setSearchTerm(e.target.value)}
+              />
+            </div>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+              {filteredOils.map((oil, idx) => (
+                <div key={idx} className="bg-white p-4 rounded-lg shadow-sm border hover:shadow-md transition border-l-4 border-l-rose-400">
+                  <div className="flex justify-between items-start mb-2">
+                    <div>
+                      <h3 className="font-bold text-gray-800 text-lg">{oil.name}</h3>
+                      <p className="text-xs text-gray-500 font-mono">{oil.en}</p>
+                    </div>
+                    <span className="text-xs bg-rose-100 text-rose-700 px-2 py-0.5 rounded-full font-bold">{oil.family}</span>
+                  </div>
+                  <div className="text-xs space-y-1.5 text-gray-600 mt-3">
+                    <p><span className="font-bold text-gray-400">學名:</span> {oil.latin}</p>
+                    <p><span className="font-bold text-gray-400">部位/製法:</span> {oil.part} / {oil.method}</p>
+                    <p><span className="font-bold text-gray-400">調性:</span> {oil.note}</p>
+                    <div className="bg-rose-50 p-2 rounded mt-2">
+                      <p className="font-bold text-rose-800 mb-1">主要療效</p>
+                      <p>{oil.effect}</p>
+                    </div>
+                    {oil.caution && (
+                      <p className="text-red-500 flex items-start mt-1">
+                        <span className="font-bold mr-1">⚠️</span> {oil.caution}
+                      </p>
+                    )}
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
+
+        {/* 2. 植物油 Tab */}
+        {activeTab === 'carriers' && (
+          <div className="grid grid-cols-1 gap-4">
+            {ADVANCED_AROMA_DATA.carriers.map((c, idx) => (
+              <div key={idx} className="bg-white p-5 rounded-lg shadow-sm border flex flex-col md:flex-row md:items-center">
+                <div className="md:w-1/3 mb-3 md:mb-0">
+                  <h3 className="font-bold text-amber-700 text-lg">{c.name}</h3>
+                  <p className="text-sm text-gray-500">{c.en}</p>
+                </div>
+                <div className="md:w-2/3 grid grid-cols-1 sm:grid-cols-3 gap-4 text-sm">
+                  <div className="bg-amber-50 p-2 rounded">
+                    <span className="block text-amber-800 font-bold text-xs mb-1">特性</span>
+                    {c.feature}
+                  </div>
+                  <div className="bg-amber-50 p-2 rounded">
+                    <span className="block text-amber-800 font-bold text-xs mb-1">適用膚質</span>
+                    {c.skin}
+                  </div>
+                  <div className="bg-amber-50 p-2 rounded">
+                    <span className="block text-amber-800 font-bold text-xs mb-1">營養成分</span>
+                    {c.nutrient}
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        )}
+
+        {/* 3. 歷史發展 Tab */}
+        {activeTab === 'history' && (
+          <div className="relative border-l-2 border-sky-200 ml-3 space-y-8 py-2">
+            {ADVANCED_AROMA_DATA.history.map((h, idx) => (
+              <div key={idx} className="relative pl-6">
+                <span className="absolute -left-[9px] top-0 w-4 h-4 bg-sky-500 rounded-full border-4 border-white shadow-sm"></span>
+                <div className="bg-white p-4 rounded-lg shadow-sm border border-gray-200">
+                  <span className="text-xs font-bold text-sky-600 bg-sky-50 px-2 py-1 rounded mb-2 inline-block">{h.era}</span>
+                  <h3 className="font-bold text-gray-800 text-base mb-1">{h.event}</h3>
+                  <p className="text-sm text-gray-600">{h.content}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        )}
+
+        {/* 4. 個案研究 Tab */}
+        {activeTab === 'cases' && (
+          <div className="space-y-8">
+            <div>
+              <h3 className="text-emerald-700 font-bold text-lg mb-4 flex items-center border-b pb-2">
+                <GraduationCap className="w-5 h-5 mr-2"/> 老師範例個案 (必考題)
+              </h3>
+              <div className="grid grid-cols-1 gap-4">
+                {ADVANCED_AROMA_DATA.cases.teacher.map((c, idx) => (
+                  <div key={idx} className="bg-white border-l-4 border-emerald-500 p-4 rounded-r-lg shadow-sm">
+                    <div className="flex justify-between mb-2">
+                      <h4 className="font-bold text-gray-800">{c.title}</h4>
+                      <span className="text-xs bg-gray-100 text-gray-500 px-2 py-1 rounded">症狀: {c.symptom}</span>
+                    </div>
+                    <div className="bg-emerald-50 p-3 rounded-md text-sm text-emerald-900 mb-2">
+                      <strong>💡 配方:</strong> {c.recipe}
+                    </div>
+                    <p className="text-xs text-gray-500">備註: {c.note}</p>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            <div>
+              <h3 className="text-cyan-700 font-bold text-lg mb-4 flex items-center border-b pb-2">
+                <Users className="w-5 h-5 mr-2"/> 同學提問個案
+              </h3>
+              <div className="grid grid-cols-1 gap-4">
+                {ADVANCED_AROMA_DATA.cases.student.map((c, idx) => (
+                  <div key={idx} className="bg-white border-l-4 border-cyan-500 p-4 rounded-r-lg shadow-sm">
+                    <div className="flex justify-between mb-2">
+                      <h4 className="font-bold text-gray-800">{c.title}</h4>
+                      <span className="text-xs bg-gray-100 text-gray-500 px-2 py-1 rounded">症狀: {c.symptom}</span>
+                    </div>
+                    <div className="bg-cyan-50 p-3 rounded-md text-sm text-cyan-900 mb-2">
+                      <strong>💡 配方:</strong> {c.recipe}
+                    </div>
+                    <p className="text-xs text-gray-500">備註: {c.note}</p>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        )}
+
+        {/* 5. 其他重點 Tab */}
+        {activeTab === 'theory' && (
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            {ADVANCED_AROMA_DATA.theory.map((t, idx) => (
+              <div key={idx} className="bg-white p-5 rounded-lg shadow-sm border border-violet-100">
+                <h3 className="font-bold text-violet-700 mb-3 text-lg flex items-center">
+                  <span className="w-2 h-6 bg-violet-500 rounded-full mr-3"></span>
+                  {t.title}
+                </h3>
+                <p className="text-sm text-gray-600 whitespace-pre-line leading-relaxed">{t.content}</p>
+              </div>
+            ))}
+          </div>
+        )}
+
+      </div>
+    </div>
+  );
+};
+
+// 6. 課程知識庫總容器 (Course Knowledge Hub)
 const CourseKnowledgeHub = () => {
-  const [activeCourse, setActiveCourse] = useState('oil'); // oil, candle, plant, etc.
+  const [activeCourse, setActiveCourse] = useState('oil'); // oil, advanced_oil, candle, etc.
 
   return (
     <div className="space-y-6">
@@ -1106,7 +1365,19 @@ const CourseKnowledgeHub = () => {
             }`}
           >
             <Beaker className="w-4 h-4 mr-2"/>
-            精油調香
+            初階調香
+          </button>
+
+          <button 
+            onClick={() => setActiveCourse('advanced_oil')}
+            className={`flex items-center px-4 py-2 rounded-lg font-medium transition ${
+              activeCourse === 'advanced_oil' 
+              ? 'bg-rose-600 text-white shadow-md ring-2 ring-rose-300' 
+              : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
+            }`}
+          >
+            <Droplet className="w-4 h-4 mr-2"/>
+            進階芳療 (NAHA)
           </button>
           
           <button disabled className="flex items-center px-4 py-2 rounded-lg font-medium bg-gray-50 text-gray-400 cursor-not-allowed border border-dashed border-gray-300">
@@ -1129,6 +1400,7 @@ const CourseKnowledgeHub = () => {
       {/* Course Content Area */}
       <div className="animate-fade-in">
         {activeCourse === 'oil' && <OilCourseHandout />}
+        {activeCourse === 'advanced_oil' && <AdvancedAromaHandout />}
       </div>
     </div>
   );
@@ -1153,7 +1425,7 @@ const App = () => {
       <aside className="hidden md:flex flex-col w-64 bg-slate-800 text-white min-h-screen shadow-2xl z-10">
         <div className="p-6 border-b border-slate-700 bg-slate-900">
            <h1 className="text-2xl font-bold flex items-center"><Users className="mr-2"/> 內部大補帖</h1>
-           <p className="text-xs text-slate-400 mt-2">下班隨手作 Internal Tools V2.2</p>
+           <p className="text-xs text-slate-400 mt-2">下班隨手作 Internal Tools V2.3</p>
         </div>
         <nav className="flex-1 p-4 space-y-2">
            {navItems.map(item => (
